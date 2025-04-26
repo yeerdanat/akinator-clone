@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Игра клон акинатора. Акинатор задает вопросы отправляя запросы через Groq API через заранее подготовленный промпт. Игра сделана с помощью next.js и react. 
 
-## Getting Started
+Чтобы запустить программу клонируйте репозиторий и установите зависимости.
 
-First, run the development server:
+npm install
 
-```bash
+Создайте файл .env.local и добавьте этот код:
+
+GROQ_API_KEY=<ваш_ключ_GROQ> //api ключ я добавил в google forms
+GROQ_MODEL=meta-llama/llama-4-maverick-17b-128e-instruct
+
+Запустите через
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+изначально я хотел реализовать проект через api акинатора, но не смог найти подходящий ключ, поэтому решил интегрировать ИИ. Сперва я пробовал api openai, но столкнулся с проблемой что слишком быстро заканчиваются токены, поэтому нашел альтернативу в виде groqcloud. 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+причина выбора next.js очень проста, я работал с ним раньше и эта технология мне знакома :)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+все запросы хранятся локально, т.е. при перезапуске программы вся история стирается. Наверное еще одно ограничение это время ожидания ответа от API, которое в среднем занимает 1-2 секунды, но иногда может занимать до 5-10 секунд на ответ. 
